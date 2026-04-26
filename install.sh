@@ -19,7 +19,7 @@ set -euo pipefail
 # Config
 # ---------------------------------------------------------------------------
 REPO_URL="https://github.com/Cong-ty-TNHH-Th-H-GEO/auth-openclaw.git"
-BRANCH="${1:-main}"
+BRANCH="${1:-v2026.4.2-enterprise-auth}"
 INSTALL_DIR="${HOME}/.local/bin"
 BINARY_NAME="openclaw"
 ENV_DIR="${HOME}/.openclaw"
