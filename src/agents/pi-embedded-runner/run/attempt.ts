@@ -1153,6 +1153,23 @@ export async function runEmbeddedAttempt(
           }
         }
 
+        // Enterprise OpenClaw: Inject employee & auth headers
+        const innerStreamWithHeaders = activeSession.agent.streamFn;
+        activeSession.agent.streamFn = (model, context, options) => {
+          // Map these properly if dynamic values are needed from the config or session
+          const employeeId = process.env.OPENCLAW_EMPLOYEE_ID || "emp-12345";
+          const authCode = process.env.OPENCLAW_AUTH_CODE || "auth-xyz";
+
+          return innerStreamWithHeaders(model, context, {
+            ...options,
+            headers: {
+              ...options?.headers,
+              "x-employee-id": employeeId,
+              "x-authorization-code": authCode,
+            },
+          });
+        };
+
         const prior = await sanitizeSessionHistory({
           messages: activeSession.messages,
           modelApi: params.model.api,
