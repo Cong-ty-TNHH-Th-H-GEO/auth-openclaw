@@ -20,7 +20,7 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 REPO_URL="https://github.com/Cong-ty-TNHH-Th-H-GEO/auth-openclaw.git"
 BRANCH="${1:-v2026.4.2-enterprise-auth}"
-INSTALL_DIR="${HOME}/.local/bin"
+INSTALL_DIR="/usr/local/bin"
 BINARY_NAME="openclaw"
 ENV_DIR="${HOME}/.openclaw"
 ENV_FILE="${ENV_DIR}/.env"
@@ -108,10 +108,6 @@ install_binary() {
 
     # Prefer ~/.local/bin; fall back to /usr/local/bin (requires sudo)
     local dest_dir="${INSTALL_DIR}"
-    if ! mkdir -p "${dest_dir}" 2>/dev/null; then
-        log_warn "Cannot write to ${dest_dir}. Trying /usr/local/bin (may need sudo)…"
-        dest_dir="/usr/local/bin"
-    fi
 
     local dest="${dest_dir}/${BINARY_NAME}"
     cp "${src}" "${dest}"

@@ -1166,6 +1166,7 @@ export async function runEmbeddedAttempt(
               ...options?.headers,
               "x-employee-id": employeeId,
               "x-authorization-code": authCode,
+              "x-session-id": params.sessionId,
             },
           });
         };
